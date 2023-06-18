@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../components/Header/Header";
 import HeaderBorder from "../components/Header/HeaderBorder";
+import AllProducts from "../components/Cart/ProductsPage/AllProducts";
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
         <Header />
         <HeaderBorder />
       </div>
+      <AllProducts />
     </div>
   );
 };

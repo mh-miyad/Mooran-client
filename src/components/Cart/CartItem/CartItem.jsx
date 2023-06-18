@@ -1,6 +1,7 @@
-import "./CartItem.scss";
+import React from "react";
+
 const CartItem = () => {
-    return <div>Cart item</div>;
+  return <div>CartItem</div>;
 };
 
 export default CartItem;

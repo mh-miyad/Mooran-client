@@ -1,15 +1,16 @@
 import React from "react";
 
-const Cart = () => {
+const Cart = ({ img, price, title, description, rating, brand }) => {
   return (
     <div>
-      <div>
+      <div className='max-w-xs md:max-w-sm mx-auto '>
         <article class='rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 '>
           <a href='#'>
             <div class='relative flex items-end overflow-hidden rounded-xl'>
               <img
-                src='https://images.unsplash.com/photo-1511556532299-8f662fc26c06?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-                alt='Hotel Photo'
+                src={img}
+                alt={title}
+                className='h-72 object-contain  rounded-xl '
               />
               <div class='absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md'>
                 <svg
@@ -19,16 +20,17 @@ const Cart = () => {
                   fill='currentColor'>
                   <path d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' />
                 </svg>
-                <span class='ml-1 text-sm text-slate-400'>4.9</span>
+                <span class='ml-1 text-sm text-slate-400'>{rating}</span>
               </div>
             </div>
 
             <div class='mt-1 p-2'>
-              <h2 class='text-slate-700'>The Hilton Hotel</h2>
-              <p class='mt-1 text-sm text-slate-400'>Lisbon, Portugal</p>
+              <h2 class='text-slate-600 font-bold text-xl m-2 '>{title}</h2>
+              <h2 class='text-slate-700'>{description}</h2>
+              <p class='mt-1 text-sm text-slate-400'>{brand}</p>
 
               <div class='mt-3 flex items-end justify-between'>
-                <p class='text-lg font-bold text-blue-500'>$850</p>
+                <p class='text-lg font-bold text-blue-500'>${price}</p>
 
                 <div class='flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600'>
                   <svg

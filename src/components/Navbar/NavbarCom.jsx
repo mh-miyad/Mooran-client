@@ -49,7 +49,7 @@ const NavbarCom = () => {
         </div>
         <Navbar.Collapse>
           <Navbar.Link>
-            <NavLink>Home</NavLink>
+            <NavLink to={"/"}>Home</NavLink>
           </Navbar.Link>
           <Navbar.Link>
             <NavLink>Products </NavLink>
