@@ -1,9 +1,9 @@
 #section {
   background-image: url("../../../assets//icons/fill3.png"),
     url("../../../assets//icons/fill2.png");
-  height: 100vh;
+  height: 50vh;
   background-repeat: no-repeat;
   background-position: top left, top right;
-  background-size: 25%, 25%;
+  background-size: 30%, 30%;
   margin-top: 20px;
 }
