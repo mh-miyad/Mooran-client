@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Cart from "../Cart";
 import { Pagination, Select } from "flowbite-react";
-import ProductFilter from "./ProductFilter";
 
 const AllProducts = () => {
   const [data, setData] = useState([]);
@@ -12,11 +11,6 @@ const AllProducts = () => {
       .then((res) => res.json())
       .then((resData) => setData(resData));
   }, [data]);
-  //   useEffect(() => {
-  //     fetch("https://dummyjson.com/products/category/mens-shirts")
-  //       .then((res) => res.json())
-  //       .then((resData) => setData1(resData));
-  //   }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -39,7 +33,7 @@ const AllProducts = () => {
       </p>
       {isdata ? (
         <div className=''>
-          <ProductFilter />
+          {/* <ProductFilter /> */}
           <div>
             <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
               {items?.map((ele) => {
