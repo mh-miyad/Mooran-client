@@ -8,7 +8,7 @@ const AllProducts = () => {
 
   const [isdata, setIsData] = useState(false);
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://mooran.vercel.app/products")
       .then((res) => res.json())
       .then((resData) => setData(resData));
   }, []);
