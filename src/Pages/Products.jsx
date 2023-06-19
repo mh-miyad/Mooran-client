@@ -1,29 +1,69 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./../components/Cart/Cart";
-import { Label, Pagination, RangeSlider, Select } from "flowbite-react";
+import {
+  Label,
+  Pagination,
+  RangeSlider,
+  Select,
+  Spinner,
+} from "flowbite-react";
+import axios from "axios";
+import CartSkeleton from "../components/Cart/CartSkeleton";
 
 const Products = () => {
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [data, setData] = useState([]);
   const [priceValue, setPriceValue] = useState(null);
   const [isdata, setIsData] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    setLoading(true);
     fetch("https://mooran.vercel.app/products")
       .then((res) => res.json())
       .then((resData) => setData(resData));
-  }, [data]);
+    setLoading(false);
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const items = data?.slice(indexOfFirstItem, indexOfLastItem);
-
   useEffect(() => {
     if (items.length === 0) {
-      setIsData(!isdata);
+      setIsData(false); // Update to true
       setCurrentPage(1);
     }
   }, [data, items.length]);
+
+  const handleCheckboxChange = (event) => {
+    const { value } = event.target;
+    if (selectedCategories.includes(value)) {
+      setSelectedCategories(
+        selectedCategories.filter((category) => category !== value),
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, value]);
+    }
+  };
+  useEffect(() => {
+    // Retrieve products based on selected categories
+    if (selectedCategories.length > 0) {
+      setLoading(true);
+      axios
+        .get("http://localhost:5000/category", {
+          params: { categories: selectedCategories },
+        })
+        .then((response) => {
+          setData(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error retrieving products:", error);
+        });
+    }
+  }, [selectedCategories]);
+
   return (
     <div>
       <div>
@@ -88,7 +128,7 @@ const Products = () => {
                 <div>
                   <div className='my-10'>
                     Choose Your Category
-                    <div className='space-y-4'>
+                    <form className='space-y-4'>
                       <div className='flex items-center'>
                         <input
                           id='filter-size-1'
@@ -96,9 +136,11 @@ const Products = () => {
                           name='category'
                           type='checkbox'
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                          checked={selectedCategories.includes("women")}
+                          onChange={handleCheckboxChange}
                         />
                         <label
-                          for='filter-size-1'
+                          htmlFor='filter-size-1'
                           className='ml-3 text-sm text-gray-600'>
                           Women
                         </label>
@@ -110,70 +152,80 @@ const Products = () => {
                           name='category'
                           type='checkbox'
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                          checked={selectedCategories.includes("men")}
+                          onChange={handleCheckboxChange}
                         />
                         <label
-                          for='filter-size-2'
+                          htmlFor='filter-size-2'
                           className='ml-3 text-sm text-gray-600'>
                           Men
                         </label>
                       </div>
                       <div className='flex items-center'>
                         <input
-                          id='filter-size-2'
+                          id='filter-size-3'
                           value='fragrances'
                           name='category'
                           type='checkbox'
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                          checked={selectedCategories.includes("fragrances")}
+                          onChange={handleCheckboxChange}
                         />
                         <label
-                          for='filter-size-2'
+                          htmlFor='filter-size-3'
                           className='ml-3 text-sm text-gray-600'>
                           Fragrances
                         </label>
                       </div>
                       <div className='flex items-center'>
                         <input
-                          id='filter-size-2'
+                          id='filter-size-4'
                           value='womens-shoes'
                           name='category'
                           type='checkbox'
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                          checked={selectedCategories.includes("womens-shoes")}
+                          onChange={handleCheckboxChange}
                         />
                         <label
-                          for='filter-size-2'
+                          htmlFor='filter-size-4'
                           className='ml-3 text-sm text-gray-600'>
-                          Womens-Shoes
+                          Women's Shoes
                         </label>
                       </div>
                       <div className='flex items-center'>
                         <input
-                          id='filter-size-2'
+                          id='filter-size-5'
                           value='mens-shirts'
                           name='category'
                           type='checkbox'
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                          checked={selectedCategories.includes("mens-shirts")}
+                          onChange={handleCheckboxChange}
                         />
                         <label
-                          for='filter-size-2'
+                          htmlFor='filter-size-5'
                           className='ml-3 text-sm text-gray-600'>
-                          Mens-Shirts
+                          Men's Shirts
                         </label>
                       </div>
                       <div className='flex items-center'>
                         <input
-                          id='filter-size-2'
+                          id='filter-size-6'
                           value='sunglasses'
                           name='category'
                           type='checkbox'
                           className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                          checked={selectedCategories.includes("sunglasses")}
+                          onChange={handleCheckboxChange}
                         />
                         <label
-                          for='filter-size-2'
+                          htmlFor='filter-size-6'
                           className='ml-3 text-sm text-gray-600'>
                           Sunglasses
                         </label>
                       </div>
-                    </div>
+                    </form>
                   </div>
                   <div>
                     Choose Your Price Range
@@ -192,21 +244,43 @@ const Products = () => {
               </div>
             </div>
             <div>
-              <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
-                {items?.map((ele) => {
-                  return (
-                    <Cart
-                      key={ele.id}
-                      img={ele.thumbnail}
-                      brand={ele.category}
-                      title={ele.title}
-                      price={ele.price}
-                      rating={ele.rating.rate}
-                      // description={ele.description}
-                    />
-                  );
-                })}
-              </div>
+              {!loading ? (
+                <>
+                  <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
+                    {items?.map((ele) => {
+                      return (
+                        <Cart
+                          key={ele.id}
+                          img={ele.thumbnail}
+                          brand={ele.category}
+                          title={ele.title}
+                          price={ele.price}
+                          rating={ele.rating.rate}
+                          // description={ele.description}
+                        />
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className='text-center '>
+                    <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                      <CartSkeleton />
+                    </div>
+                  </div>
+                </>
+              )}
               <div className='flex items-center flex-col-reverse md:flex-row  justify-center gap-10 my-10'>
                 <Pagination
                   className='text-center  '

@@ -35,6 +35,26 @@ async function run() {
       const result = await productCollection.find().toArray();
       res.send(result);
     });
+
+    app.get("/category", async (req, res) => {
+      const { categories } = req.query;
+
+      const categoryArray = Array.isArray(categories)
+        ? categories
+        : [categories];
+
+      try {
+        const products = await productCollection
+          .find({ category: { $in: categoryArray } })
+          .toArray();
+
+        res.status(200).json(products);
+      } catch (error) {
+        console.error("Error retrieving products:", error);
+        res.status(500).json({ error: "Failed to retrieve products" });
+      }
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
