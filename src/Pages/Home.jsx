@@ -5,6 +5,7 @@ import AllProducts from "../components/Cart/ProductsPage/AllProducts";
 import NewsLetter from "../components/NewsLatter/NewsLetter";
 import WorksDemo from "../components/NewsLatter/WorkDemo/WorksDemo";
 import Testimonial from "../components/NewsLatter/WorkDemo/Testimonial";
+import FAQSec from "../components/NewsLatter/FAQ/FAQSec";
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
       </div>
       <div className='my-5 '>
         <WorksDemo />
+      </div>
+      <div className='my-5 '>
+        <FAQSec />
       </div>
       <div className='my-5 '>
         <Testimonial />

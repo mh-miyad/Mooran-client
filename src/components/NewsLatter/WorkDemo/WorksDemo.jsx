@@ -7,7 +7,7 @@ import cash from "../../../assets/icons/cash.png";
 const WorksDemo = () => {
   return (
     <div className=' '>
-      <p className='my-20 text-center text-xl md:text-3xl lg:text-5xl '>
+      <p className='my-20 text-center text-xl md:text-3xl lg:text-5xl font-bold text-gray-600'>
         What We Do{" "}
       </p>
       <div className='lg' id='section'>
