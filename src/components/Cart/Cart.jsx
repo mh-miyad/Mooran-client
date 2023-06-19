@@ -3,14 +3,14 @@ import React from "react";
 const Cart = ({ img, price, title, description, rating, brand }) => {
   return (
     <div>
-      <div className='max-w-xs md:max-w-sm mx-auto '>
+      <div className='max-w-xs md:max-w-xs mx-auto '>
         <article class='rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 '>
           <a href='#'>
             <div class='relative flex items-end overflow-hidden rounded-xl'>
               <img
                 src={img}
                 alt={title}
-                className='h-72 object-contain  rounded-xl '
+                className='w-full h-72 object-contain  rounded-xl '
               />
               <div class='absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md'>
                 <svg

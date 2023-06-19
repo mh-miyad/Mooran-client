@@ -19,7 +19,7 @@ const AllProducts = () => {
   //   }, []);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const items = data?.slice(indexOfFirstItem, indexOfLastItem);
@@ -41,7 +41,7 @@ const AllProducts = () => {
         <div className=''>
           <ProductFilter />
           <div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5  '>
+            <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
               {items?.map((ele) => {
                 return (
                   <Cart
@@ -72,9 +72,10 @@ const AllProducts = () => {
                   id='itemsPerPage'
                   defaultValue={5}
                   onClick={(e) => setItemsPerPage(e.target.value)}>
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  <option value={15}>15</option>
+                  <option value={4}>4</option>
+                  <option value={6}>8</option>
+                  <option value={12}>12</option>
+                  <option value={16}>16</option>
                   <option value={20}>20</option>
                 </Select>
               </div>

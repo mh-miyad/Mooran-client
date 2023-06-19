@@ -1,12 +1,21 @@
 #header {
-  background-image: url("../../assets/Texture.png"),
+  /* background-image: url("../../assets/Texture.png"),
     linear-gradient(
       90deg,
       rgba(101, 101, 242, 0.32) 0%,
       rgba(146, 162, 255, 0.821) 0%,
       #9dc9fbd0 100%
+    ); */
+  background: rgb(11, 56, 139);
+  background: url("../../assets/Texture.png"),
+    linear-gradient(
+      90deg,
+      rgba(11, 56, 139, 0.9668242296918768) 0%,
+      rgba(23, 31, 133, 1) 35%,
+      rgba(221, 16, 150, 1) 100%
     );
-  background-color: rgb(11, 171, 159);
   background-blend-mode: overlay;
+  color: white !important;
+
   /* Other styling properties for the header */
 }

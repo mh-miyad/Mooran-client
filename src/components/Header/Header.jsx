@@ -14,13 +14,13 @@ const Header = () => {
             <div className='md:w-1/2'>
               <div className='capitalize mt-10 text-[10px] '>
                 <div className='flex md:w-10/12 p-4 md:gap-10 bg-gray-200 rounded-lg'>
-                  <div className='flex gap-2'>
+                  <div className='flex gap-2 text-black'>
                     <img src={icon1} className='w-3 h-3' alt='' /> free Register
                   </div>
-                  <div className='flex gap-2'>
+                  <div className='flex gap-2 text-black'>
                     <img src={icon1} className='w-3 h-3' alt='' /> great service{" "}
                   </div>
-                  <div className='flex gap-2'>
+                  <div className='flex gap-2 text-black'>
                     <img src={icon1} className='w-3 h-3' alt='' /> easy payment{" "}
                   </div>
                 </div>
