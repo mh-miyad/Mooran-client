@@ -38,11 +38,8 @@ const AllProducts = () => {
         Our latest Products{" "}
       </p>
       {isdata ? (
-        <div className='flex justify-between'>
-          <div>
-            {" "}
-            <ProductFilter />{" "}
-          </div>
+        <div className=''>
+          <ProductFilter />
           <div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-5  '>
               {items?.map((ele) => {
@@ -59,16 +56,16 @@ const AllProducts = () => {
                 );
               })}
             </div>
-            <div className='flex items-center justify-center gap-10'>
+            <div className='flex items-center flex-col-reverse md:flex-row  justify-center gap-10 my-10'>
               <Pagination
-                className='text-center my-10 '
+                className='text-center  '
                 currentPage={currentPage}
                 onPageChange={(page) => {
                   setCurrentPage(page);
                 }}
                 totalPages={30}
               />{" "}
-              <div>
+              <div className=''>
                 {" "}
                 <span> Par Page Show </span>
                 <Select
