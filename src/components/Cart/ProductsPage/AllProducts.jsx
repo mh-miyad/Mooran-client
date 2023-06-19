@@ -46,7 +46,7 @@ const AllProducts = () => {
                 return (
                   <Cart
                     key={ele.id}
-                    img={ele.image}
+                    img={ele.thumbnail}
                     brand={ele.category}
                     title={ele.title}
                     price={ele.price}
@@ -83,17 +83,19 @@ const AllProducts = () => {
         </div>
       ) : (
         <>
-          <p className='text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-700 via-yellow-300   '>
-            {" "}
-            More Products Added Soon
-          </p>
-          <div className='text-center '>
-            <button
-              className='bg-gradient-to-r from-cyan-500 to-sky-600 via-blue-500 px-6 py-3 text-white font-bold  rounded-3xl'
-              onClick={() => setIsData(true)}>
+          <div className='my-8'>
+            <p className='text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-700 via-yellow-300   '>
               {" "}
-              Show Available Products
-            </button>
+              More Products Added Soon
+            </p>
+            <div className='text-center '>
+              <button
+                className='bg-gradient-to-r from-cyan-500 to-sky-600 via-blue-500 px-6 py-3 text-white font-bold  rounded-3xl'
+                onClick={() => setIsData(true)}>
+                {" "}
+                Show Available Products
+              </button>
+            </div>
           </div>
         </>
       )}
