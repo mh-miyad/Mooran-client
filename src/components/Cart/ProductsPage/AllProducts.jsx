@@ -11,7 +11,7 @@ const AllProducts = () => {
     fetch("https://mooran.vercel.app/products")
       .then((res) => res.json())
       .then((resData) => setData(resData));
-  }, []);
+  }, [data]);
   //   useEffect(() => {
   //     fetch("https://dummyjson.com/products/category/mens-shirts")
   //       .then((res) => res.json())

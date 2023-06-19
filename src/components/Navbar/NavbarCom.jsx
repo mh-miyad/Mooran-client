@@ -52,7 +52,7 @@ const NavbarCom = () => {
             <NavLink to={"/"}>Home</NavLink>
           </Navbar.Link>
           <Navbar.Link>
-            <NavLink>Products </NavLink>
+            <NavLink to={"/products"}>Products </NavLink>
           </Navbar.Link>
           <Navbar.Link>
             <NavLink>Contact</NavLink>
