@@ -6,6 +6,7 @@ import NewsLetter from "../components/NewsLatter/NewsLetter";
 import WorksDemo from "../components/NewsLatter/WorkDemo/WorksDemo";
 import Testimonial from "../components/NewsLatter/WorkDemo/Testimonial";
 import FAQSec from "../components/NewsLatter/FAQ/FAQSec";
+import Banner from "../components/Slider/Banner";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         <Header />
         <HeaderBorder />
       </div>
+
       <AllProducts />
 
       <div>

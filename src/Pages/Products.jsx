@@ -10,6 +10,7 @@ import {
 } from "flowbite-react";
 import axios from "axios";
 import CartSkeleton from "../components/Cart/CartSkeleton";
+import Banner from "../components/Slider/Banner";
 
 const Products = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -76,11 +77,15 @@ const Products = () => {
   }, [data, items.length, selectedCategories]);
   return (
     <div>
+      <div className='my-10'>
+        <Banner />
+      </div>
       <div>
         <p className='text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-500 via-indigo-600   '>
           {" "}
           Our latest Products{" "}
         </p>
+
         {isdata ? (
           <div className=' container mx-auto '>
             <div>
