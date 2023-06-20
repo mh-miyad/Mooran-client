@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cart from "./../components/Cart/Cart";
 import {
+  Dropdown,
   Label,
   Pagination,
   RangeSlider,
@@ -16,25 +17,18 @@ const Products = () => {
   const [priceValue, setPriceValue] = useState(null);
   const [isdata, setIsData] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+
   useEffect(() => {
     setLoading(true);
     fetch("https://mooran.vercel.app/products")
       .then((res) => res.json())
-      .then((resData) => setData(resData));
-    setLoading(false);
+      .then((resData) => {
+        setData(resData);
+        setLoading(false);
+      });
   }, []);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const items = data?.slice(indexOfFirstItem, indexOfLastItem);
-  useEffect(() => {
-    if (items.length === 0) {
-      setIsData(false); // Update to true
-      setCurrentPage(1);
-    }
-  }, [data, items.length]);
 
   const handleCheckboxChange = (event) => {
     const { value } = event.target;
@@ -46,24 +40,40 @@ const Products = () => {
       setSelectedCategories([...selectedCategories, value]);
     }
   };
-  useEffect(() => {
-    // Retrieve products based on selected categories
-    if (selectedCategories.length > 0) {
-      setLoading(true);
-      axios
-        .get("http://localhost:5000/category", {
-          params: { categories: selectedCategories },
-        })
-        .then((response) => {
-          setData(response.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error retrieving products:", error);
-        });
-    }
-  }, [selectedCategories]);
 
+  useEffect(() => {
+    // Retrieve products based on selected categories and price range
+    setLoading(true);
+    axios
+      .get("http://localhost:5000/category", {
+        params: {
+          categories: selectedCategories,
+        },
+      })
+      .then((response) => {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error retrieving products:", error);
+      });
+  }, [selectedCategories, priceValue]);
+
+  const handleRangeSliderChange = (event) => {
+    const { value } = event.target;
+    setPriceValue(value);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const items = data?.slice(indexOfFirstItem, indexOfLastItem);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      setIsData(true);
+      setCurrentPage(1);
+    }
+  }, [data, items.length, selectedCategories]);
   return (
     <div>
       <div>
@@ -74,9 +84,148 @@ const Products = () => {
         {isdata ? (
           <div className=''>
             <div>
+              <div>
+                <Dropdown label='Dropdown button'>
+                  <div className='p-10'>
+                    <div>
+                      <div>
+                        <div className='my-10'>
+                          Choose Your Category
+                          <form className='space-y-4'>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-size-1'
+                                value='womens-dresses'
+                                name='category'
+                                type='checkbox'
+                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                checked={selectedCategories.includes(
+                                  "womens-dresses",
+                                )}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label
+                                htmlFor='filter-size-1'
+                                className='ml-3 text-sm text-gray-600'>
+                                Women
+                              </label>
+                            </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-size-2'
+                                value='mens-shirts'
+                                name='category'
+                                type='checkbox'
+                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                checked={selectedCategories.includes(
+                                  "mens-shirts",
+                                )}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label
+                                htmlFor='filter-size-2'
+                                className='ml-3 text-sm text-gray-600'>
+                                Men
+                              </label>
+                            </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-size-3'
+                                value='fragrances'
+                                name='category'
+                                type='checkbox'
+                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                checked={selectedCategories.includes(
+                                  "fragrances",
+                                )}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label
+                                htmlFor='filter-size-3'
+                                className='ml-3 text-sm text-gray-600'>
+                                Fragrances
+                              </label>
+                            </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-size-4'
+                                value='womens-shoes'
+                                name='category'
+                                type='checkbox'
+                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                checked={selectedCategories.includes(
+                                  "womens-shoes",
+                                )}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label
+                                htmlFor='filter-size-4'
+                                className='ml-3 text-sm text-gray-600'>
+                                Women's Shoes
+                              </label>
+                            </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-size-5'
+                                value='mens-shoes'
+                                name='category'
+                                type='checkbox'
+                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                checked={selectedCategories.includes(
+                                  "mens-shoes",
+                                )}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label
+                                htmlFor='filter-size-5'
+                                className='ml-3 text-sm text-gray-600'>
+                                Men's Shoes
+                              </label>
+                            </div>
+                            <div className='flex items-center'>
+                              <input
+                                id='filter-size-6'
+                                value='sunglasses'
+                                name='category'
+                                type='checkbox'
+                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                checked={selectedCategories.includes(
+                                  "sunglasses",
+                                )}
+                                onChange={handleCheckboxChange}
+                              />
+                              <label
+                                htmlFor='filter-size-6'
+                                className='ml-3 text-sm text-gray-600'>
+                                Sunglasses
+                              </label>
+                            </div>
+                          </form>
+                        </div>
+                        <div>
+                          Choose Your Price Range
+                          <div>
+                            <Label htmlFor='default-range' value={priceValue} />
+
+                            <RangeSlider
+                              id='default-range'
+                              max={100000}
+                              min={20}
+                              onChange={handleRangeSliderChange}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Dropdown>
+              </div>
+            </div>
+
+            <div>
               {!loading ? (
                 <>
-                  <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
+                  <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5 my-10 '>
                     {items?.map((ele) => {
                       return (
                         <Cart

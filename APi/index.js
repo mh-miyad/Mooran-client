@@ -36,23 +36,69 @@ async function run() {
       res.send(result);
     });
 
+    // app.get("/category", async (req, res) => {
+    //   const { categories } = req.query;
+    //   const categoryArray = Array.isArray(categories)
+    //     ? categories
+    //     : [categories];
+
+    //   try {
+    //     const products = await productCollection
+    //       .find({ category: { $in: categoryArray } })
+    //       .toArray();
+    //     console.log(products);
+    //     res.status(200).json(products);
+    //   } catch (error) {
+    //     console.error("Error retrieving products:", error);
+    //     res.status(500).json({ error: "Failed to retrieve products" });
+    //   }
+    // });
+    // app.get("/category", async (req, res) => {
+    //   const { categories } = req.query;
+
+    //   try {
+    //     let query = {};
+    //     if (categories) {
+    //       const categoryArray = Array.isArray(categories)
+    //         ? categories
+    //         : [categories];
+    //       query = { category: { $in: categoryArray } };
+    //       const products = await productCollection.find(query).toArray();
+    //       res.status(200).json(products);
+    //     }
+    //     // Empty query when no categories are selected
+    //     const products = await productCollection.find().toArray();
+    //     console.log(products.length);
+    //     res.status(200).json(products);
+    //   } catch (error) {
+    //     console.error("Error retrieving products:", error);
+    //     res.status(500).json({ error: "Failed to retrieve products" });
+    //   }
+    // });
     app.get("/category", async (req, res) => {
       const { categories } = req.query;
-      console.log(categories);
-      // const categoryArray = Array.isArray(categories)
-      //   ? categories
-      //   : [categories];
 
-      // try {
-      //   const products = await productCollection
-      //     .find({ category: { $in: categoryArray } })
-      //     .toArray();
+      try {
+        let query = {};
 
-      //   res.status(200).json(products);
-      // } catch (error) {
-      //   console.error("Error retrieving products:", error);
-      //   res.status(500).json({ error: "Failed to retrieve products" });
-      // }
+        if (categories) {
+          const categoryArray = Array.isArray(categories)
+            ? categories
+            : [categories];
+          query = { category: { $in: categoryArray } };
+          const products = await productCollection.find(query).toArray();
+
+          res.status(200).json(products);
+        } else {
+          query = {};
+          const products = await productCollection.find(query).toArray();
+
+          res.status(200).json(products);
+        }
+      } catch (error) {
+        console.error("Error retrieving products:", error);
+        res.status(500).json({ error: "Failed to retrieve products" });
+      }
     });
 
     // Send a ping to confirm a successful connection
