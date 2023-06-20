@@ -38,21 +38,21 @@ async function run() {
 
     app.get("/category", async (req, res) => {
       const { categories } = req.query;
+      console.log(categories);
+      // const categoryArray = Array.isArray(categories)
+      //   ? categories
+      //   : [categories];
 
-      const categoryArray = Array.isArray(categories)
-        ? categories
-        : [categories];
+      // try {
+      //   const products = await productCollection
+      //     .find({ category: { $in: categoryArray } })
+      //     .toArray();
 
-      try {
-        const products = await productCollection
-          .find({ category: { $in: categoryArray } })
-          .toArray();
-
-        res.status(200).json(products);
-      } catch (error) {
-        console.error("Error retrieving products:", error);
-        res.status(500).json({ error: "Failed to retrieve products" });
-      }
+      //   res.status(200).json(products);
+      // } catch (error) {
+      //   console.error("Error retrieving products:", error);
+      //   res.status(500).json({ error: "Failed to retrieve products" });
+      // }
     });
 
     // Send a ping to confirm a successful connection
