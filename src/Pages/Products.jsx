@@ -16,7 +16,7 @@ const Products = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [data, setData] = useState([]);
   const [priceValue, setPriceValue] = useState(null);
-  const [isdata, setIsData] = useState(false);
+  const [isdata, setIsData] = useState(true);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
@@ -28,6 +28,7 @@ const Products = () => {
       .then((resData) => {
         setData(resData);
         setLoading(false);
+        setIsData(true);
       });
   }, []);
 
