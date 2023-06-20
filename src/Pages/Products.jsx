@@ -82,10 +82,13 @@ const Products = () => {
           Our latest Products{" "}
         </p>
         {isdata ? (
-          <div className=''>
+          <div className=' container mx-auto '>
             <div>
               <div>
-                <Dropdown label='Dropdown button'>
+                <Dropdown
+                  label='Filter By '
+                  gradientDuoTone='purpleToBlue'
+                  className=''>
                   <div className='p-10'>
                     <div>
                       <div>
