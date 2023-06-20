@@ -74,7 +74,7 @@ const Products = () => {
       setIsData(true);
       setCurrentPage(1);
     }
-  }, [data, items.length, selectedCategories]);
+  }, [items.length, selectedCategories]);
   return (
     <div>
       <div className='my-10'>
