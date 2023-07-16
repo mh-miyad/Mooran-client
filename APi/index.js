@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.send("Mooran Is Running .............  ");
 });
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const uri = process.env.URI;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -32,7 +32,8 @@ async function run() {
       .collection("productDB");
 
     app.get("/products", async (req, res) => {
-      const result = await productCollection.find().toArray();
+      const query = {};
+      const result = await productCollection.find(query).toArray();
       res.send(result);
     });
 
@@ -60,6 +61,14 @@ async function run() {
         console.error("Error retrieving products:", error);
         res.status(500).json({ error: "Failed to retrieve products" });
       }
+    });
+
+    app.get("/details/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await productCollection.findOne(query);
+
+      res.send(result);
     });
 
     // Send a ping to confirm a successful connection
