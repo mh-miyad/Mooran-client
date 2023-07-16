@@ -39,7 +39,8 @@ const AllProducts = () => {
               {items?.map((ele) => {
                 return (
                   <Cart
-                    key={ele.id}
+                    id={ele._id}
+                    key={ele._id}
                     img={ele.thumbnail}
                     brand={ele.category}
                     title={ele.title}
