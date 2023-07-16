@@ -13,7 +13,7 @@ const ProductDetails = () => {
       .then((result) => {
         setData(result);
       });
-  }, [id, data]);
+  }, [id]);
 
   return (
     <div className='container  mx-auto'>
@@ -21,10 +21,15 @@ const ProductDetails = () => {
         <Banner />
       </div>
       <DetailsComp
-        id={data._id}
+        id={data}
         image={data.images}
         key={data._id}
         name={data.title}
+        price={data.price}
+        rating={data.rating}
+        stock={data.stock}
+        discountPercentage={data.discountPercentage}
+        description={data.description}
       />
     </div>
   );
