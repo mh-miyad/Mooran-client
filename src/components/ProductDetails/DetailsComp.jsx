@@ -79,10 +79,10 @@ const DetailsComp = ({
               voluptatibus quod ipsum aut, unde dolor cum veniam?
             </div>
           </div>
-          <div className='border p-5 flex justify-between uppercase items-center bg-gradient-to-t from-indigo-700 via-pink-500 to-blue-500 font-extrabold text-white text-sm rounded-xl'>
+          <div className='border p-5 flex justify-between uppercase items-center  font-extrabold  text-sm rounded-xl'>
             <div className='font-bold '>get discount </div>
-            <div>{discountPercentage}%</div>
-            <button className='bg-red-600 px-5 py-2 drop-shadow-xl rounded-2xl hover:ring-2 ring-red-500 font-medium'>
+            <span className='text-red-500 text-xl'>{discountPercentage}%</span>
+            <button className='bg-indigo-600 px-5 py-2 drop-shadow-xl rounded-2xl hover:ring-2 ring-indigo-300 font-medium text-white'>
               Claim{" "}
             </button>
           </div>
