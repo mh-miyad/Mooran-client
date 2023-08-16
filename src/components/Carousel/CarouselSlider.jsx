@@ -5,13 +5,17 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const CarouselSlider = ({ img }) => {
   return (
-    <div>
+    <div className=''>
       <div className=' p-5 bg-gray-200 rounded-xl shadow-2xl '>
         {img ? (
-          <Carousel autoPlay={true}>
+          <Carousel
+            autoPlay={true}
+            verticalSwipe='natural'
+            className=''
+            dynamicHeight>
             {img.map((e) => {
               return (
-                <div key={e}>
+                <div key={e} className=''>
                   <img src={e} alt='carousel-image' className='' />
                 </div>
               );

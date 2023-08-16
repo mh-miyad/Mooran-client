@@ -30,6 +30,7 @@ const ProductDetails = () => {
         stock={data.stock}
         discountPercentage={data.discountPercentage}
         description={data.description}
+        data={data}
       />
     </div>
   );

@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CarouselSlider from "../Carousel/CarouselSlider";
 import { Rating } from "flowbite-react";
+import { useDispatch, useSelector } from "react-redux";
+import { add } from "../../Redux/cartSlice/cartSlice";
 
 const DetailsComp = ({
   id,
@@ -12,9 +14,15 @@ const DetailsComp = ({
   rating,
   stock,
   discountPercentage,
+  data,
 }) => {
-  console.log(id);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) => state.cartItem);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItem));
+  }, [cartItem]);
+  console.log(cartItem);
   return (
     <div className=' '>
       <div className='flex gap-5 md:flex lg:justify-center  md:gap-10 flex-col md:flex-row '>
@@ -88,7 +96,7 @@ const DetailsComp = ({
           </div>
 
           <div className='text-center mt-5 '>
-            <div className='my-2 '>
+            {/* <div className='my-2 '>
               <button
                 className='rounded-xl  px-5 border py-2 bg-gray-300 mx-2'
                 onClick={() => setQuantity(quantity + 1)}>
@@ -109,10 +117,15 @@ const DetailsComp = ({
                 }>
                 -
               </button>
-            </div>
-            <div>
+            </div> */}
+            <div className=' flex flex-col gap-4 md:flex-row'>
               <button className='bg-pink-500 text-white px-12 py-3 rounded-3xl hover:ring-4 ring-pink-600 transition-all ease-in-out duration-150 '>
                 Buy Now
+              </button>
+              <button
+                className='bg-blue-500 text-white px-7 py-3 rounded-3xl hover:ring-4 ring-indigo-300 transition-all ease-in-out duration-150 '
+                onClick={() => dispatch(add(data))}>
+                Add To cart
               </button>
             </div>
           </div>
