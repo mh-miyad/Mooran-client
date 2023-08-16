@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Cart = ({ id, img, price, title, description, rating, brand }) => {
+const Cart = ({ id, img, price, title, description, rating, brand, data }) => {
+  const dispatch = useDispatch();
+  const cartItem = useSelector((state) => state.cartItem);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItem));
+  }, [cartItem]);
   return (
     <div>
       <div className='max-w-xs md:max-w-xs mx-auto '>
@@ -49,7 +55,9 @@ const Cart = ({ id, img, price, title, description, rating, brand }) => {
                       />
                     </svg>
 
-                    <button class='text-sm'>Add to cart</button>
+                    <button onClick={() => dispatch(add(data))} class='text-sm'>
+                      Add to cart
+                    </button>
                   </div>
                 </div>
               </div>

@@ -245,7 +245,7 @@ const Products = () => {
                           title={ele.title}
                           price={ele.price}
                           rating={ele.rating.rate}
-                          // description={ele.description}
+                          data={ele}
                         />
                       );
                     })}

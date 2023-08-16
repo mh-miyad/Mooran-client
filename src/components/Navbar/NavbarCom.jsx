@@ -3,8 +3,10 @@ import React from "react";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import { BsCart2 } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const NavbarCom = () => {
+  const cartItem = useSelector((state) => state.cartItem);
   return (
     <div>
       <Navbar fluid rounded>
@@ -19,9 +21,12 @@ const NavbarCom = () => {
           </span>
         </Navbar.Brand>
         <div className='flex md:order-2 items-center gap-5'>
-          <div className='bg-blue-200 p-2 rounded-full'>
-            <button>
-              <BsCart2 className='w-5 h-5  ' />
+          <div className=' p-2 rounded-full '>
+            <button className='relative '>
+              <span className='font-bold text-red-600 absolute'>
+                {cartItem.length}
+              </span>
+              <BsCart2 className='w-6 h-6 relative top-3' />
             </button>
           </div>
           <Dropdown
