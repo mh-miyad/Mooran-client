@@ -6,11 +6,10 @@ import NewsLetter from "../components/NewsLatter/NewsLetter";
 import WorksDemo from "../components/NewsLatter/WorkDemo/WorksDemo";
 import Testimonial from "../components/NewsLatter/WorkDemo/Testimonial";
 import FAQSec from "../components/NewsLatter/FAQ/FAQSec";
-import Banner from "../components/Slider/Banner";
 
 const Home = () => {
   return (
-    <div>
+    <div className="container mx-auto ">
       <div>
         <Header />
         <HeaderBorder />
@@ -27,7 +26,7 @@ const Home = () => {
       <div className='my-5 '>
         <FAQSec />
       </div>
-      <div className='my-5 '>
+      <div className='my-6 '>
         <Testimonial />
       </div>
     </div>
