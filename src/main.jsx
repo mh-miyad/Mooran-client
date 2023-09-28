@@ -12,7 +12,7 @@ import store from "./Redux/Store/store";
 AOS.init();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <div className='max-w-7xl container mx-auto '>
+    <div className='max-w-7xl container mx-auto px-5 md:px-8 '>
       <Provider store={store}>
         <RouterProvider router={router} />
       </Provider>

@@ -10,16 +10,12 @@ const ModalComp = ({ openModal, setOpenModal }) => {
                 position={"top-right"}
                 onClose={() => setOpenModal(false)}
             >
-                <Modal.Header>Small modal</Modal.Header>
-                <Modal.Body>
-                    <CartDetails />
+                <Modal.Header> <p className='md:text-2xl lg:text-4xl font-extrabold  uppercase text-pink-500 drop-shadow-xl  tracking-wider mx-10'>
+                    Cart   Items </p></Modal.Header>
+                <Modal.Body className=''>
+                    <CartDetails setOpenModal={setOpenModal} />
                 </Modal.Body>
-                <Modal.Footer>
 
-                    <Button color="failure" onClick={() => setOpenModal(false)}>
-                        Close
-                    </Button>
-                </Modal.Footer>
             </Modal>
 
 
