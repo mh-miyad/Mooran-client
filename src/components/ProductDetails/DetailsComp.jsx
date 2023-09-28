@@ -22,7 +22,7 @@ const DetailsComp = ({
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItem));
   }, [cartItem]);
-  console.log(cartItem);
+
   return (
     <div className=' '>
       <div className='flex gap-5 md:flex lg:justify-center  md:gap-10 flex-col md:flex-row '>

@@ -1,11 +1,13 @@
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
-import React from "react";
+import React, { useState } from "react";
 import logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import { BsCart2 } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import ModalComp from "../Modal/ModalComp";
 
 const NavbarCom = () => {
+  const [openModal, setOpenModal] = useState(false);
   const cartItem = useSelector((state) => state.cartItem);
   return (
     <div>
@@ -22,7 +24,7 @@ const NavbarCom = () => {
         </Navbar.Brand>
         <div className='flex md:order-2 items-center gap-5'>
           <div className=' p-2 rounded-full '>
-            <button className='relative '>
+            <button className='relative ' onClick={() => setOpenModal(true)}>
               <span className='font-bold text-red-600 absolute'>
                 {cartItem.length}
               </span>
@@ -64,6 +66,7 @@ const NavbarCom = () => {
           </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
+      <ModalComp openModal={openModal} setOpenModal={setOpenModal} />
     </div>
   );
 };
