@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import DetailsComp from "../components/ProductDetails/DetailsComp";
 import { useParams } from "react-router-dom";
 import Banner from "../components/Slider/Banner";
+import SimilarItem from "../components/SimilarItem/SimilarItem";
 
 const ProductDetails = () => {
   const [data, setData] = useState([]);
@@ -16,8 +17,8 @@ const ProductDetails = () => {
   }, [id]);
 
   return (
-    <div className='container  mx-auto'>
-      <div className='mb-20'>
+    <div className="container  mx-auto">
+      <div className="mb-20">
         <Banner />
       </div>
       <DetailsComp
@@ -32,6 +33,9 @@ const ProductDetails = () => {
         description={data.description}
         data={data}
       />
+      <div>
+        <SimilarItem />
+      </div>
     </div>
   );
 };
