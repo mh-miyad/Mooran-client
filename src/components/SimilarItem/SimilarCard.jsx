@@ -2,7 +2,7 @@ import React from "react";
 import img from "../../assets/products/earbuds-prod-1.webp";
 import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
-const SimilarCard = () => {
+const SimilarCard = ({ img, price, id }) => {
   return (
     <div>
       <div className="max-w-xs">
@@ -12,7 +12,7 @@ const SimilarCard = () => {
               <img src={img} alt="" className="max-h-40" />
             </div>
             <div className="text-center font-bold text-slate-500">
-              <p>Price : 300</p>
+              <p>Price : {price}</p>
             </div>
           </Card>
         </Link>

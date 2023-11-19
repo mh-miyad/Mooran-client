@@ -63,6 +63,30 @@ async function run() {
       }
     });
 
+    app.get("/similarItems", async (req, res) => {
+      const { ctgItem } = await req.query;
+
+      // try {
+      //   let query = {};
+
+      //   if (ctgItem) {
+      //     const categoryArray = Array.isArray(ctgItem) ? ctgItem : [ctgItem];
+      //     query = { category: { $in: categoryArray } };
+      //     const products = await productCollection.find(query).toArray();
+
+      //     res.status(200).json(products);
+      //   } else {
+      //     query = {};
+      //     const products = await productCollection.find(query).toArray();
+
+      //     res.status(200).json(products);
+      //   }
+      // } catch (error) {
+      //   console.error("Error retrieving products:", error);
+      //   res.status(500).json({ error: "Failed to retrieve products" });
+      // }
+    });
+
     app.get("/details/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -74,7 +98,7 @@ async function run() {
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
-      "Pinged your deployment. You successfully connected to MongoDB!",
+      "Pinged your deployment. You successfully connected to MongoDB!"
     );
   } finally {
     // Ensures that the client will close when you finish/error

@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import Banner from "../components/Slider/Banner";
 import SimilarItem from "../components/SimilarItem/SimilarItem";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addProduct } from "../Redux/cartSlice/similarCartSlice";
 
 const ProductDetails = () => {
   const [data, setData] = useState([]);
@@ -17,6 +19,10 @@ const ProductDetails = () => {
 
     loadData();
   }, [id]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(addProduct(data?.category));
+  }, [data]);
 
   return (
     <div className="container  mx-auto">
