@@ -23,20 +23,22 @@ const Products = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://mooran.vercel.app/products")
-      .then((res) => res.json())
-      .then((resData) => {
-        setData(resData);
-        setLoading(false);
-        setIsData(true);
-      });
+    const loadData = async () => {
+      const response = await axios.get(`https://mooran.vercel.app/products`);
+      const data = await response.data;
+      setData(data);
+      setLoading(false);
+      setIsData(true);
+    };
+
+    loadData();
   }, []);
 
   const handleCheckboxChange = (event) => {
     const { value } = event.target;
     if (selectedCategories.includes(value)) {
       setSelectedCategories(
-        selectedCategories.filter((category) => category !== value),
+        selectedCategories.filter((category) => category !== value)
       );
     } else {
       setSelectedCategories([...selectedCategories, value]);
@@ -78,134 +80,141 @@ const Products = () => {
   }, [items.length, selectedCategories]);
   return (
     <div>
-      <div className='my-10'>
+      <div className="my-10">
         <Banner />
       </div>
       <div>
-        <p className='text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-500 via-indigo-600   '>
+        <p className="text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-500 via-indigo-600   ">
           {" "}
           Our latest Products{" "}
         </p>
 
         {isdata ? (
-          <div className=' container mx-auto '>
+          <div className=" container mx-auto ">
             <div>
               <div>
                 <Dropdown
-                  label='Filter By '
-                  gradientDuoTone='purpleToBlue'
-                  className=''>
-                  <div className='p-10'>
+                  label="Filter By "
+                  gradientDuoTone="purpleToBlue"
+                  className=""
+                >
+                  <div className="p-10">
                     <div>
                       <div>
-                        <div className='my-10'>
+                        <div className="my-10">
                           Choose Your Category
-                          <form className='space-y-4'>
-                            <div className='flex items-center'>
+                          <form className="space-y-4">
+                            <div className="flex items-center">
                               <input
-                                id='filter-size-1'
-                                value='womens-dresses'
-                                name='category'
-                                type='checkbox'
-                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                id="filter-size-1"
+                                value="womens-dresses"
+                                name="category"
+                                type="checkbox"
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 checked={selectedCategories.includes(
-                                  "womens-dresses",
+                                  "womens-dresses"
                                 )}
                                 onChange={handleCheckboxChange}
                               />
                               <label
-                                htmlFor='filter-size-1'
-                                className='ml-3 text-sm text-gray-600'>
+                                htmlFor="filter-size-1"
+                                className="ml-3 text-sm text-gray-600"
+                              >
                                 Women
                               </label>
                             </div>
-                            <div className='flex items-center'>
+                            <div className="flex items-center">
                               <input
-                                id='filter-size-2'
-                                value='mens-shirts'
-                                name='category'
-                                type='checkbox'
-                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                id="filter-size-2"
+                                value="mens-shirts"
+                                name="category"
+                                type="checkbox"
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 checked={selectedCategories.includes(
-                                  "mens-shirts",
+                                  "mens-shirts"
                                 )}
                                 onChange={handleCheckboxChange}
                               />
                               <label
-                                htmlFor='filter-size-2'
-                                className='ml-3 text-sm text-gray-600'>
+                                htmlFor="filter-size-2"
+                                className="ml-3 text-sm text-gray-600"
+                              >
                                 Men
                               </label>
                             </div>
-                            <div className='flex items-center'>
+                            <div className="flex items-center">
                               <input
-                                id='filter-size-3'
-                                value='fragrances'
-                                name='category'
-                                type='checkbox'
-                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                id="filter-size-3"
+                                value="fragrances"
+                                name="category"
+                                type="checkbox"
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 checked={selectedCategories.includes(
-                                  "fragrances",
+                                  "fragrances"
                                 )}
                                 onChange={handleCheckboxChange}
                               />
                               <label
-                                htmlFor='filter-size-3'
-                                className='ml-3 text-sm text-gray-600'>
+                                htmlFor="filter-size-3"
+                                className="ml-3 text-sm text-gray-600"
+                              >
                                 Fragrances
                               </label>
                             </div>
-                            <div className='flex items-center'>
+                            <div className="flex items-center">
                               <input
-                                id='filter-size-4'
-                                value='womens-shoes'
-                                name='category'
-                                type='checkbox'
-                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                id="filter-size-4"
+                                value="womens-shoes"
+                                name="category"
+                                type="checkbox"
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 checked={selectedCategories.includes(
-                                  "womens-shoes",
+                                  "womens-shoes"
                                 )}
                                 onChange={handleCheckboxChange}
                               />
                               <label
-                                htmlFor='filter-size-4'
-                                className='ml-3 text-sm text-gray-600'>
+                                htmlFor="filter-size-4"
+                                className="ml-3 text-sm text-gray-600"
+                              >
                                 Women's Shoes
                               </label>
                             </div>
-                            <div className='flex items-center'>
+                            <div className="flex items-center">
                               <input
-                                id='filter-size-5'
-                                value='mens-shoes'
-                                name='category'
-                                type='checkbox'
-                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                id="filter-size-5"
+                                value="mens-shoes"
+                                name="category"
+                                type="checkbox"
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 checked={selectedCategories.includes(
-                                  "mens-shoes",
+                                  "mens-shoes"
                                 )}
                                 onChange={handleCheckboxChange}
                               />
                               <label
-                                htmlFor='filter-size-5'
-                                className='ml-3 text-sm text-gray-600'>
+                                htmlFor="filter-size-5"
+                                className="ml-3 text-sm text-gray-600"
+                              >
                                 Men's Shoes
                               </label>
                             </div>
-                            <div className='flex items-center'>
+                            <div className="flex items-center">
                               <input
-                                id='filter-size-6'
-                                value='sunglasses'
-                                name='category'
-                                type='checkbox'
-                                className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500'
+                                id="filter-size-6"
+                                value="sunglasses"
+                                name="category"
+                                type="checkbox"
+                                className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 checked={selectedCategories.includes(
-                                  "sunglasses",
+                                  "sunglasses"
                                 )}
                                 onChange={handleCheckboxChange}
                               />
                               <label
-                                htmlFor='filter-size-6'
-                                className='ml-3 text-sm text-gray-600'>
+                                htmlFor="filter-size-6"
+                                className="ml-3 text-sm text-gray-600"
+                              >
                                 Sunglasses
                               </label>
                             </div>
@@ -214,10 +223,10 @@ const Products = () => {
                         <div>
                           Choose Your Price Range
                           <div>
-                            <Label htmlFor='default-range' value={priceValue} />
+                            <Label htmlFor="default-range" value={priceValue} />
 
                             <RangeSlider
-                              id='default-range'
+                              id="default-range"
                               max={100000}
                               min={20}
                               onChange={handleRangeSliderChange}
@@ -234,27 +243,29 @@ const Products = () => {
             <div>
               {!loading ? (
                 <>
-                  <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5 my-10 '>
+                  <div className="grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5 my-10 ">
                     {items?.map((ele) => {
                       return (
-                        <Cart
-                          key={ele._id}
-                          id={ele._id}
-                          img={ele.thumbnail}
-                          brand={ele.category}
-                          title={ele.title}
-                          price={ele.price}
-                          rating={ele.rating.rate}
-                          data={ele}
-                        />
+                        <div key={ele?._id}>
+                          <Cart
+                            key={ele._id}
+                            id={ele._id}
+                            img={ele.thumbnail}
+                            brand={ele.category}
+                            title={ele.title}
+                            price={ele.price}
+                            rating={ele.rating.rate}
+                            data={ele}
+                          />
+                        </div>
                       );
                     })}
                   </div>
                 </>
               ) : (
                 <>
-                  <div className='text-center '>
-                    <div className='grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  '>
+                  <div className="text-center ">
+                    <div className="grid grid-cols-1 md:grid-cols-2 items-center lg:grid-cols-4  gap-5  ">
                       <CartSkeleton />
                       <CartSkeleton />
                       <CartSkeleton />
@@ -270,22 +281,23 @@ const Products = () => {
                   </div>
                 </>
               )}
-              <div className='flex items-center flex-col-reverse md:flex-row  justify-center gap-10 my-10'>
+              <div className="flex items-center flex-col-reverse md:flex-row  justify-center gap-10 my-10">
                 <Pagination
-                  className='text-center  '
+                  className="text-center  "
                   currentPage={currentPage}
                   onPageChange={(page) => {
                     setCurrentPage(page);
                   }}
                   totalPages={30}
                 />{" "}
-                <div className=''>
+                <div className="">
                   {" "}
                   <span> Par Page Show </span>
                   <Select
-                    id='itemsPerPage'
+                    id="itemsPerPage"
                     defaultValue={5}
-                    onClick={(e) => setItemsPerPage(e.target.value)}>
+                    onClick={(e) => setItemsPerPage(e.target.value)}
+                  >
                     <option value={4}>4</option>
                     <option value={6}>8</option>
                     <option value={12}>12</option>
@@ -298,15 +310,16 @@ const Products = () => {
           </div>
         ) : (
           <>
-            <div className='my-8'>
-              <p className='text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-700 via-yellow-300   '>
+            <div className="my-8">
+              <p className="text-2xl font-bold my-10 md:text-4xl lg:text-6xl text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-700 via-yellow-300   ">
                 {" "}
                 More Products Added Soon
               </p>
-              <div className='text-center '>
+              <div className="text-center ">
                 <button
-                  className='bg-gradient-to-r from-cyan-500 to-sky-600 via-blue-500 px-6 py-3 text-white font-bold  rounded-3xl'
-                  onClick={() => setIsData(true)}>
+                  className="bg-gradient-to-r from-cyan-500 to-sky-600 via-blue-500 px-6 py-3 text-white font-bold  rounded-3xl"
+                  onClick={() => setIsData(true)}
+                >
                   {" "}
                   Show Available Products
                 </button>

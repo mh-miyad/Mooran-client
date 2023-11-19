@@ -15,6 +15,7 @@ const DetailsComp = ({
   stock,
   discountPercentage,
   data,
+  category,
 }) => {
   // const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const DetailsComp = ({
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItem));
   }, [cartItem]);
-
+  console.log(category);
   return (
     <div className=" ">
       <div className="flex gap-5 md:flex lg:justify-center  md:gap-10 flex-col md:flex-row ">

@@ -3,17 +3,19 @@ import DetailsComp from "../components/ProductDetails/DetailsComp";
 import { useParams } from "react-router-dom";
 import Banner from "../components/Slider/Banner";
 import SimilarItem from "../components/SimilarItem/SimilarItem";
+import axios from "axios";
 
 const ProductDetails = () => {
   const [data, setData] = useState([]);
   const { id } = useParams();
   useEffect(() => {
     const url = `https://mooran.vercel.app/details/${id}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((result) => {
-        setData(result);
-      });
+    const loadData = async () => {
+      const { data } = await axios.get(url);
+      await setData(data);
+    };
+
+    loadData();
   }, [id]);
 
   return (
@@ -22,16 +24,17 @@ const ProductDetails = () => {
         <Banner />
       </div>
       <DetailsComp
-        id={data}
-        image={data.images}
-        key={data._id}
-        name={data.title}
-        price={data.price}
-        rating={data.rating}
-        stock={data.stock}
-        discountPercentage={data.discountPercentage}
-        description={data.description}
+        id={data._id}
+        key={data?._id}
+        image={data?.images}
+        name={data?.title}
+        price={data?.price}
+        rating={data?.rating}
+        stock={data?.stock}
+        discountPercentage={data?.discountPercentage}
+        description={data?.description}
         data={data}
+        category={data?.category}
       />
       <div>
         <SimilarItem />
